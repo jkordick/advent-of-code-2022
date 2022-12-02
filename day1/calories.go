@@ -29,6 +29,8 @@ func main() {
 
 	fmt.Println("highest calories:", total_calories[len(total_calories)-1])
 
+	fmt.Println("sum of the three highest calories:", addUpCalories(total_calories[len(total_calories)-3:]))
+
 }
 
 func addUpCalories(arr []int) int {
