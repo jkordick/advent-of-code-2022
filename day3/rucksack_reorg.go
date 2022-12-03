@@ -22,7 +22,7 @@ func main() {
 
 	setupPriorityMap()
 
-	findPriotityValue(input_data_string_array)
+	findPriorityValue(input_data_string_array)
 	findGroupPriorityValue(input_data_string_array)
 
 }
@@ -36,7 +36,7 @@ func findGroupPriorityValue(str []string) {
 	fmt.Println("summed up group priorities:", group_priotity_value)
 }
 
-func findPriotityValue(str []string) {
+func findPriorityValue(str []string) {
 	for i := 0; i < len(str); i++ {
 		firstHalf, secondHalf := halveString(str[i])
 		priority_char := compareChars(firstHalf, secondHalf)
