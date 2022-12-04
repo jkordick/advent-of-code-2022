@@ -9,6 +9,7 @@ import (
 )
 
 var number_of_fully_contained_ranges int
+var number_of_partially_contained_ranges int
 
 func main() {
 	input_data, err := ioutil.ReadFile("input.txt")
@@ -25,6 +26,8 @@ func main() {
 	}
 
 	fmt.Println("number of fully contained ranges:", number_of_fully_contained_ranges)
+	fmt.Println("number of partially contained ranges:", number_of_partially_contained_ranges)
+
 }
 
 func separateSections(str string) (string, string) {
@@ -39,6 +42,19 @@ func compareSectionRanges(sectionA, sectionB string) {
 	if sectionA_int[0] <= sectionB_int[0] && sectionA_int[1] >= sectionB_int[1] || sectionB_int[0] <= sectionA_int[0] && sectionB_int[1] >= sectionA_int[1] {
 		number_of_fully_contained_ranges++
 	}
+
+	rangeA := makeRange(sectionA_int[0], sectionA_int[1])
+	rangeB := makeRange(sectionB_int[0], sectionB_int[1])
+
+out:
+	for _, i := range rangeA {
+		for _, j := range rangeB {
+			if i == j {
+				number_of_partially_contained_ranges++
+				break out
+			}
+		}
+	}
 }
 
 func convvertStringArrayToIntArray(str []string) []int {
@@ -51,4 +67,12 @@ func convvertStringArrayToIntArray(str []string) []int {
 		int_array = append(int_array, j)
 	}
 	return int_array
+}
+
+func makeRange(min, max int) []int {
+	r := make([]int, max-min+1)
+	for i := range r {
+		r[i] = min + i
+	}
+	return r
 }
